@@ -1,0 +1,51 @@
+---
+title: "ESM204HW4"
+author: "Robert Saldivar"
+date: "June 4, 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+```{r}
+#Loading Packages and Data
+
+library(tidyverse)
+library(RColorBrewer)
+
+Data <- read_csv("HW4Data.csv")
+```
+
+```{r}
+#Exploring data
+MCA_graph <- ggplot(Data, aes(x = Abatement, y = MC_A)) + 
+  geom_point()
+
+MCB_graph <- ggplot(Data, aes(x = Abatement, y = MC_B)) + 
+  geom_point()
+
+MCC_graph <- ggplot(Data, aes(x = Abatement, y = MC_C)) + 
+  geom_point()
+
+MCD_graph <- ggplot(Data, aes(x = Abatement, y = MC_D)) + 
+  geom_point()
+
+MCA_graph
+MCB_graph
+MCC_graph
+MCD_graph
+```
+
+```{r}
+#Running Linear Regressions
+
+MCA_lm <- lm(MC_A ~ Abatement, data = Data)
+MCB_lm <- lm(MC_B ~ Abatement, data = Data)
+MCC_lm <- lm(MC_C ~ Abatement, data = Data)
+MCD_lm <- lm(MC_D ~ Abatement, data = Data)
+
+summary(MCA_lm)
+summary(MCB_lm)
+summary(MCC_lm)
+summary(MCD_lm)
