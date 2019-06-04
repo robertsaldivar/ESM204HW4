@@ -8,6 +8,7 @@ output: html_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+
 ```{r}
 #Loading Packages and Data
 
@@ -20,16 +21,28 @@ Data <- read_csv("HW4Data.csv")
 ```{r}
 #Exploring data
 MCA_graph <- ggplot(Data, aes(x = Abatement, y = MC_A)) + 
-  geom_point()
+  geom_point()+
+  theme_bw() +
+  geom_smooth(method = lm, se = TRUE, size = 0.6, color = "grey")+
+  scale_x_continuous()
 
 MCB_graph <- ggplot(Data, aes(x = Abatement, y = MC_B)) + 
-  geom_point()
+  geom_point()+
+  theme_bw() +
+  geom_smooth(method = lm, se = TRUE, size = 0.6, color = "grey")+
+  scale_x_continuous()
 
 MCC_graph <- ggplot(Data, aes(x = Abatement, y = MC_C)) + 
-  geom_point()
+  geom_point()+
+  theme_bw() +
+  geom_smooth(method = lm, se = TRUE, size = 0.6, color = "grey")+
+  scale_x_continuous()
 
 MCD_graph <- ggplot(Data, aes(x = Abatement, y = MC_D)) + 
-  geom_point()
+  geom_point()+
+  theme_bw() +
+  geom_smooth(method = lm, se = TRUE, size = 0.6, color = "grey")+
+  scale_x_continuous()
 
 MCA_graph
 MCB_graph
@@ -49,3 +62,12 @@ summary(MCA_lm)
 summary(MCB_lm)
 summary(MCC_lm)
 summary(MCD_lm)
+```
+
+
+```{r}
+#Deriving a demand curve for region A
+
+
+```
+
