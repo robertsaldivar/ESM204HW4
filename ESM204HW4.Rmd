@@ -66,8 +66,19 @@ summary(MCD_lm)
 
 
 ```{r}
-#Deriving a demand curve for region A
+#Deriving a demand curve for all region
 
+MC_A_Price <- MCA_lm$coefficients[1] + MCA_lm$coefficients[2]*180
+
+MC_B_Price <- MCB_lm$coefficients[1] + MCB_lm$coefficients[2]*200
+
+MC_C_Price <- MCC_lm$coefficients[1] + MCC_lm$coefficients[2]*220
+
+MC_D_Price <- MCD_lm$coefficients[1] + MCD_lm$coefficients[2]*300
+
+```
+
+```{r}
 
 ```
 
