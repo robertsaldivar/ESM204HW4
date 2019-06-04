@@ -66,7 +66,7 @@ summary(MCD_lm)
 
 
 ```{r}
-#Deriving a demand curve for all region
+#Deriving a price all regions are willing to pay for polluting
 
 MC_A_Price <- MCA_lm$coefficients[1] + MCA_lm$coefficients[2]*180
 
@@ -79,6 +79,74 @@ MC_D_Price <- MCD_lm$coefficients[1] + MCD_lm$coefficients[2]*300
 ```
 
 ```{r}
+#Deriving the demand curve for all regions
 
+MBA_slope <- (MC_A_Price - 0)/(0-180)
+
+MBB_slope <- (MC_B_Price - 0)/(0-200)
+
+MBC_slope <- (MC_C_Price - 0)/(0-220)
+
+MBD_slope <- (MC_D_Price - 0)/(0-300)
+
+
+```
+
+```{r}
+seq_a <- seq(from = 0, to = 180)%>%
+  as.data.frame()
+colnames(seq_a)<-"pollution"
+
+pol_price_unit_a <- seq_a %>%
+  mutate(pollution, pollution*MBA_slope+MC_A_Price)
+colnames(pol_price_unit_a) <- c("pollution", "MWP")
+
+seq_b <- seq(from = 0, to = 200)%>%
+  as.data.frame()
+colnames(seq_b)<-"pollution"
+
+pol_price_unit_b <- seq_b %>%
+  mutate(pollution, pollution*MBB_slope+MC_B_Price)
+colnames(pol_price_unit_b) <- c("pollution", "MWP")
+
+seq_c <- seq(from = 0, to = 220)%>%
+  as.data.frame()
+colnames(seq_c)<-"pollution"
+
+pol_price_unit_c <- seq_c %>%
+  mutate(pollution, pollution*MBC_slope+MC_C_Price)
+colnames(pol_price_unit_c) <- c("pollution", "MWP")
+
+seq_d <- seq(from = 0, to = 300)%>%
+  as.data.frame()
+colnames(seq_d)<-"pollution"
+
+pol_price_unit_d <- seq_d %>%
+  mutate(pollution, pollution*MBD_slope+MC_D_Price)
+colnames(pol_price_unit_d) <- c("pollution", "MWP")
+
+
+
+```
+
+```{r}
+#Creating Graph for the Demand curves
+
+Demand_A <- ggplot(pol_price_unit_a, aes(x= pollution, y = MWP))+
+  geom_line()
+
+Demand_B <- ggplot(pol_price_unit_b, aes(x=pollution, y= MWP))+
+  geom_line()
+
+Demand_C <- ggplot(pol_price_unit_c, aes(x=pollution, y= MWP))+
+  geom_line()
+
+Demand_D <- ggplot(pol_price_unit_d, aes(x=pollution, y= MWP))+
+  geom_line()
+
+Demand_A
+Demand_B
+Demand_C
+Demand_D
 ```
 
