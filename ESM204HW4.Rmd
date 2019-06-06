@@ -102,7 +102,7 @@ colnames(seq_a)<-"pollution"
 
 pol_price_unit_a <- seq_a %>%
   mutate(pollution, pollution*MBA_slope+MC_A_Price)
-colnames(pol_price_unit_a) <- c("pollution", "MWP")
+colnames(pol_price_unit_a) <- c("pollution", "MWP_A")
 
 seq_b <- seq(from = 0, to = 200)%>%
   as.data.frame()
@@ -110,7 +110,7 @@ colnames(seq_b)<-"pollution"
 
 pol_price_unit_b <- seq_b %>%
   mutate(pollution, pollution*MBB_slope+MC_B_Price)
-colnames(pol_price_unit_b) <- c("pollution", "MWP")
+colnames(pol_price_unit_b) <- c("pollution", "MWP_B")
 
 seq_c <- seq(from = 0, to = 220)%>%
   as.data.frame()
@@ -118,7 +118,7 @@ colnames(seq_c)<-"pollution"
 
 pol_price_unit_c <- seq_c %>%
   mutate(pollution, pollution*MBC_slope+MC_C_Price)
-colnames(pol_price_unit_c) <- c("pollution", "MWP")
+colnames(pol_price_unit_c) <- c("pollution", "MWP_C")
 
 seq_d <- seq(from = 0, to = 300)%>%
   as.data.frame()
@@ -126,7 +126,7 @@ colnames(seq_d)<-"pollution"
 
 pol_price_unit_d <- seq_d %>%
   mutate(pollution, pollution*MBD_slope+MC_D_Price)
-colnames(pol_price_unit_d) <- c("pollution", "MWP")
+colnames(pol_price_unit_d) <- c("pollution", "MWP_D")
 
 
 
@@ -166,4 +166,34 @@ Demand_D
 ```
 
 *Question 3a*
+
+```{r}
+#Creating aggrigate cost curve for country x
+Abatement_Cost_ab <- full_join(pol_price_unit_a, pol_price_unit_b, by ="pollution")
+
+Abatement_Cost_ab[is.na(Abatement_Cost_ab)] <- 0
+
+Abatement_Cost_abc <- full_join(Abatement_Cost_ab, pol_price_unit_c, by = "pollution") 
+
+Abatement_Cost_abc[is.na(Abatement_Cost_abc)] <- 0
+
+Aggrigate_Cost_X <- Abatement_Cost_abc %>%
+  mutate(Aggrigate =(MWP_A+MWP_B+MWP_C))
+
+```
+
+```{r}
+#Visualizaing the aggrigate demand curve
+
+Ag_demand_curve_x <- ggplot(Aggrigate_Cost_X, aes(x=pollution)) +
+  geom_line(aes(y=Aggrigate), color = "red") +
+  geom_line(aes(y=MWP_A), color = "green") +
+  geom_line(aes(y=MWP_B), color = "blue") +
+  geom_line(aes(y=MWP_C), color = "purple") +
+  theme_bw() +
+  labs(x= "Cabon Emission", y="Marginal Benefit of Carbon Emisson ($/ton)")
+
+
+Ag_demand_curve_x
+```
 
