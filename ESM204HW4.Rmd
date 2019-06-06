@@ -18,6 +18,8 @@ library(RColorBrewer)
 Data <- read_csv("HW4Data.csv")
 ```
 
+*Question 1*
+
 ```{r}
 #Exploring data
 MCA_graph <- ggplot(Data, aes(x = Abatement, y = MC_A)) + 
@@ -64,6 +66,7 @@ summary(MCC_lm)
 summary(MCD_lm)
 ```
 
+*Question 2*
 
 ```{r}
 #Deriving a price all regions are willing to pay for polluting
@@ -133,20 +136,34 @@ colnames(pol_price_unit_d) <- c("pollution", "MWP")
 #Creating Graph for the Demand curves
 
 Demand_A <- ggplot(pol_price_unit_a, aes(x= pollution, y = MWP))+
-  geom_line()
-
+  geom_line()+
+  theme_bw() +
+  scale_x_continuous(limits=c(0,310)) +
+  scale_y_continuous(limits=c(0,180))
+  
 Demand_B <- ggplot(pol_price_unit_b, aes(x=pollution, y= MWP))+
-  geom_line()
+  geom_line() +
+  theme_bw() +
+  scale_x_continuous(limits=c(0,310)) +
+  scale_y_continuous(limits=c(0,180))
 
 Demand_C <- ggplot(pol_price_unit_c, aes(x=pollution, y= MWP))+
-  geom_line()
+  geom_line() +
+  theme_bw() +
+  scale_x_continuous(limits=c(0,310)) +
+  scale_y_continuous(limits=c(0,180))
 
 Demand_D <- ggplot(pol_price_unit_d, aes(x=pollution, y= MWP))+
-  geom_line()
+  geom_line()+
+  theme_bw() +
+  scale_x_continuous(limits=c(0,310)) +
+  scale_y_continuous(limits=c(0,180))
 
 Demand_A
 Demand_B
 Demand_C
 Demand_D
 ```
+
+*Question 3a*
 
